@@ -59,6 +59,10 @@ const SEO = ({
 					content: `website`,
 				},
 				{
+					property: `og:image`,
+					content: `https://ljd.dk/laust-johan-deleuran-og.jpg`,
+				},
+				{
 					name: `twitter:card`,
 					content: `summary`,
 				},
