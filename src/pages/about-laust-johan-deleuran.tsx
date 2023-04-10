@@ -105,9 +105,8 @@ const AboutPage = () => {
 					was so cool).
 				</p>
 				<p>
-					Now, I spend most of my time{' '}
+					Now, I spend most of my time working for{' '}
 					<del>
-						working for{' '}
 						<a href="http://www.vertic.com" target="_blank">
 							Vertic
 						</a>
@@ -118,23 +117,35 @@ const AboutPage = () => {
 						</a>
 					</del>{' '}
 					<del>
-						{' '}
 						<a href="http://www.koalition.com" target="_blank">
 							Koalition
 						</a>
-					</del>
+					</del>{' '}
 					<del>
-						{' '}
 						<a href="http://www.aws.training" target="_blank">
 							AWS
 						</a>
 					</del>{' '}
-					freelancing for amazing people who allows me to create awesome stuff,
-					in the realms of user experience design, prototyping and front-end
-					development. When I'm not working, I spend my time designing,
-					sketching, coding half-finished web experiments and reading a lot of
-					blog posts. Even though it's thoroughly nerdy I'm passionate about
-					user interactions and code.
+					<del>
+						<a href="https://hellowisp.com" target="_blank">
+							Wisp
+						</a>
+					</del>{' '}
+					<del>
+						<a href="https://hellowisp.com" target="_blank">
+							Wisp
+						</a>
+					</del>{' '}
+					<del>
+						<a href="https://boulder.care" target="_blank">
+							Boulder Care
+						</a>
+					</del>{' '}
+					where I help create awesome stuff, in the realms of user experience
+					design, prototyping and front-end development. When I'm not working, I
+					spend my time designing, sketching, coding half-finished web
+					experiments and reading a lot of blog posts. Even though it's
+					thoroughly nerdy I'm passionate about user interactions and code.
 				</p>
 				<p>
 					You can check out some of my nerdy stuff on{' '}
