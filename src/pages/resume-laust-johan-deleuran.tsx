@@ -10,9 +10,23 @@ import { Contact } from '../components/contact';
 
 const jobs = [
 	{
+		company: 'Boulder Care',
+		desc:
+			"Boulder Care's mission is to improve the lives of people with substance use disorders. I've felt extremely lucky to contribute to that mission alongside a highly motivated and talented team. I lead a team of focused engineers in a creative and highly adaptive environment where we focus on delivering value as quickly and efficiently as we can.",
+		from: '2021-08-01',
+		title: 'Software Engineering Manager',
+	},
+	{
+		company: 'Wisp',
+		desc:
+			'In my time as Lead Frontend Engineer at Wisp, I helped completely rebuild the frontend of their e-commerce website using React & Gatsby. By relentlessly focusing on performance metrics, we were able to consistently score in the 90th percentile on Google PageSpeed Insights.',
+		from: '2021-03-01',
+		title: 'Lead Frontend Engineer',
+	},
+	{
 		company: 'LJD Creative',
 		desc:
-			'Freelancing for a variety of agencies and companies creating interactive interfaces primarily using React and Canvas. ',
+			'Freelancing for a variety of agencies and companies creating interactive interfaces primarily using React and Canvas.',
 		from: '2020-08-01',
 		title: 'Freelance Creative Technologist',
 	},
