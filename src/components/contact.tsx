@@ -23,18 +23,6 @@ export const Contact = () => (
 					</td>
 				</tr>
 				<tr>
-					<td>Twitter</td>
-					<td>
-						<a
-							href="http://twitter.com/laustdeleuran"
-							className="url"
-							target="_blank"
-						>
-							@laustdeleuran
-						</a>
-					</td>
-				</tr>
-				<tr>
 					<td>LinkedIn</td>
 					<td>
 						<a
