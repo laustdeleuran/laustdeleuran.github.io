@@ -128,7 +128,7 @@ const AboutPage = () => {
 						Boulder Care
 					</a>{' '}
 					where I manage a team of awesome and super talented software engineers
-					helping further Boulder's mission o improve the lives of people with
+					helping further Boulder's mission to improve the lives of people with
 					substance use disorders. When I'm not working, I spend my time coding
 					half-finished generative graphics experiments, climbing, biking and
 					reading. Even though it's thoroughly nerdy I'm passionate about user
