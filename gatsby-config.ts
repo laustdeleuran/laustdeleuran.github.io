@@ -19,6 +19,10 @@ const config: GatsbyConfig = {
 				link: '/my-work',
 			},
 			{
+				title: 'Photos',
+				link: '/photography',
+			},
+			{
 				title: 'Get in touch',
 				link: '/about-laust-johan-deleuran#get-in-touch',
 			},
@@ -34,6 +38,7 @@ const config: GatsbyConfig = {
 		'gatsby-plugin-sitemap',
 		'gatsby-plugin-mdx',
 		'gatsby-plugin-sharp',
+		'gatsby-plugin-sharp-exif',
 		'gatsby-transformer-sharp',
 		'gatsby-transformer-remark',
 		{
