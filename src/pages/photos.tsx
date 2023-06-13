@@ -2,11 +2,11 @@
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { useStaticQuery, graphql } from 'gatsby';
 import { jsx, css } from '@emotion/react';
-import { Link } from 'gatsby';
 
 import Wysiwyg from '../components/wysiwyg';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import { Unit } from '../utils/style/style';
 
 const PhotographyPage = () => {
 	const data = useStaticQuery(graphql`
@@ -40,7 +40,7 @@ const PhotographyPage = () => {
 
 	return (
 		<Layout>
-			<SEO title="About" />
+			<SEO title="Photos" />
 			<Wysiwyg component="article">
 				<h1>What I see</h1>
 				<p>
@@ -50,13 +50,28 @@ const PhotographyPage = () => {
 				</p>
 
 				{data.allFile.edges.map(({ node }) => (
-					<figure>
+					<figure
+						css={css`
+							margin-bottom: ${Unit.HALF}px;
+
+							@media screen and (max-height: 500px),
+								screen and (max-width: 500px) {
+								margin-bottom: ${Unit.QUART}px;
+							}
+						`}
+					>
 						<GatsbyImage
 							image={node.childImageSharp.gatsbyImageData}
 							alt=""
 							css={css`
-								max-width: 90vw;
-								max-height: 90vh;
+								max-width: calc(100vw - ${Unit.FULL}px);
+								max-height: calc(100vh - ${Unit.FULL}px);
+
+								@media screen and (max-height: 500px),
+									screen and (max-width: 500px) {
+									max-width: calc(100vw - ${Unit.HALF}px);
+									max-height: calc(100vh - ${Unit.HALF}px);
+								}
 							`}
 							objectFit="contain"
 							objectPosition="left center"

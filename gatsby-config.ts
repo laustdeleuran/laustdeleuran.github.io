@@ -20,7 +20,7 @@ const config: GatsbyConfig = {
 			},
 			{
 				title: 'Photos',
-				link: '/photography',
+				link: '/photos',
 			},
 			{
 				title: 'Get in touch',
