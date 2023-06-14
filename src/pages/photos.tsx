@@ -7,8 +7,10 @@ import Wysiwyg from '../components/wysiwyg';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { Unit } from '../utils/style/style';
+import { useState } from 'react';
 
 const PhotographyPage = () => {
+	const [activeImage, setActiveImage] = useState<string>('');
 	const data = useStaticQuery(graphql`
 		query { 
 			allFile(
@@ -37,6 +39,10 @@ const PhotographyPage = () => {
 			}
 		}
 	`);
+	const openImage = data.allFile.edges.find(
+		({ node }) => node.name === activeImage,
+	)?.node;
+	console.log(openImage);
 
 	return (
 		<Layout>
@@ -50,34 +56,71 @@ const PhotographyPage = () => {
 				</p>
 
 				{data.allFile.edges.map(({ node }) => (
-					<figure
+					<a
+						key={node.name}
+						onClick={() => setActiveImage(node.name)}
 						css={css`
-							margin-bottom: ${Unit.HALF}px;
-
-							@media screen and (max-height: 500px),
-								screen and (max-width: 500px) {
-								margin-bottom: ${Unit.QUART}px;
-							}
+							cursor: pointer;
 						`}
 					>
-						<GatsbyImage
-							image={node.childImageSharp.gatsbyImageData}
-							alt=""
+						<figure
 							css={css`
-								max-width: calc(100vw - ${Unit.FULL}px);
-								max-height: calc(100vh - ${Unit.FULL}px);
+								margin-bottom: ${Unit.HALF}px;
 
 								@media screen and (max-height: 500px),
 									screen and (max-width: 500px) {
-									max-width: calc(100vw - ${Unit.HALF}px);
-									max-height: calc(100vh - ${Unit.HALF}px);
+									margin-bottom: ${Unit.QUART}px;
 								}
 							`}
+						>
+							<GatsbyImage
+								image={node.childImageSharp.gatsbyImageData}
+								alt=""
+								css={css`
+									max-width: calc(100vw - ${Unit.FULL}px);
+									max-height: calc(100vh - ${Unit.FULL}px);
+
+									@media screen and (max-height: 500px),
+										screen and (max-width: 500px) {
+										max-width: calc(100vw - ${Unit.HALF}px);
+										max-height: calc(100vh - ${Unit.HALF}px);
+									}
+								`}
+								objectFit="contain"
+								objectPosition="left center"
+							/>
+						</figure>
+					</a>
+				))}
+
+				{openImage && (
+					<figure
+						css={css`
+							position: fixed;
+							top: 0;
+							right: 0;
+							bottom: 0;
+							left: 0;
+							z-index: 2;
+
+							background-color: #000;
+							margin: 0;
+							cursor: pointer;
+						`}
+						onClick={() => setActiveImage('')}
+					>
+						<GatsbyImage
+							image={openImage.childImageSharp.gatsbyImageData}
+							alt=""
+							css={css`
+								max-width: calc(100vw);
+								max-height: calc(100vh);
+							`}
 							objectFit="contain"
-							objectPosition="left center"
+							objectPosition="center center"
 						/>
 					</figure>
-				))}
+				)}
 			</Wysiwyg>
 		</Layout>
 	);
