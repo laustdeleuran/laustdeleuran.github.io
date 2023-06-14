@@ -7,7 +7,7 @@ import Wysiwyg from '../components/wysiwyg';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { Unit } from '../utils/style/style';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const PhotographyPage = () => {
 	const [activeImage, setActiveImage] = useState<string>('');
@@ -39,10 +39,46 @@ const PhotographyPage = () => {
 			}
 		}
 	`);
-	const openImage = data.allFile.edges.find(
+
+	const allImages = data.allFile.edges;
+	const IMAGES_PER_PAGE = 10;
+	const [pages, setPages] = useState(1);
+	const [loadMore, setLoadMore] = useState(false);
+	const shownImages = allImages.slice(0, IMAGES_PER_PAGE * pages);
+
+	const loadRef = useRef<HTMLDivElement>(null);
+	const hasMore = shownImages.length < allImages.length;
+	const handler = (entries) => {
+		if (entries[0].intersectionRatie < 1) return;
+		setLoadMore(true);
+	};
+	useEffect(() => {
+		if (hasMore && loadMore) {
+			setPages(pages + 1);
+			setLoadMore(false);
+		}
+	}, [hasMore, loadMore]);
+	useEffect(() => {
+		var options = {
+			root: null,
+			threshold: 1.0,
+		};
+		const observer = new IntersectionObserver(handler, options);
+
+		setTimeout(() => {
+			if (loadRef.current) {
+				observer.observe(loadRef.current);
+			}
+		}, 1000);
+
+		return () => {
+			observer.disconnect();
+		};
+	}, [loadRef.current]);
+
+	const openImage = allImages.find(
 		({ node }) => node.name === activeImage,
 	)?.node;
-	console.log(openImage);
 
 	return (
 		<Layout>
@@ -55,7 +91,7 @@ const PhotographyPage = () => {
 					on the family projector. So now I take photos.
 				</p>
 
-				{data.allFile.edges.map(({ node }) => (
+				{shownImages.map(({ node }) => (
 					<a
 						key={node.name}
 						onClick={() => setActiveImage(node.name)}
@@ -92,6 +128,8 @@ const PhotographyPage = () => {
 						</figure>
 					</a>
 				))}
+
+				<div ref={loadRef}>{hasMore && 'Loading...'}</div>
 
 				{openImage && (
 					<figure
