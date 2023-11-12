@@ -6,17 +6,14 @@
  */
 /** @jsx jsx */
 import ReactPlayer from 'react-player';
-import { Fragment, FunctionComponent } from 'react';
+import { Fragment, FunctionComponent, PropsWithChildren } from 'react';
 import { css, jsx } from '@emotion/react';
-import { Color, Unit, Typography } from '../../utils/style/style';
+import { Color, Unit } from '../../utils/style/style';
 import { rgba } from '../../utils/rgba';
 
-const Video: FunctionComponent<{ component?: string; src: string }> = ({
-	children,
-	component = 'div',
-	src,
-	...rest
-}) =>
+const Video: FunctionComponent<
+	PropsWithChildren<{ component?: string; src: string }>
+> = ({ children, component = 'div', src, ...rest }) =>
 	jsx(component, {
 		...rest,
 		css: css`

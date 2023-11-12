@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 export const Contact = () => (
-	<React.Fragment>
+	<Fragment>
 		<h2 id="get-in-touch">Get in touch</h2>
 		<p>
 			If you ever want to get in touch, please feel free to do so! Just throw me
@@ -36,5 +36,5 @@ export const Contact = () => (
 				</tr>
 			</tbody>
 		</table>
-	</React.Fragment>
+	</Fragment>
 );

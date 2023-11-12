@@ -11,7 +11,9 @@ import { useEffect, useRef, useState } from 'react';
 
 const PhotographyPage = () => {
 	const [activeImage, setActiveImage] = useState<string>('');
-	const data = useStaticQuery(graphql`
+	const data: {
+		allFile: { edges: { node: Queries.File }[] };
+	} = useStaticQuery(graphql`
 		query { 
 			allFile(
 				filter: { absolutePath: { regex:"/(images/photography)\/.*\\.jpg$/" } }
@@ -48,8 +50,8 @@ const PhotographyPage = () => {
 
 	const loadRef = useRef<HTMLDivElement>(null);
 	const hasMore = shownImages.length < allImages.length;
-	const handler = (entries) => {
-		if (entries[0].intersectionRatie < 1) return;
+	const handler = (entries: IntersectionObserverEntry[]) => {
+		if (entries[0].intersectionRatio < 1) return;
 		setLoadMore(true);
 	};
 	useEffect(() => {
@@ -91,47 +93,49 @@ const PhotographyPage = () => {
 					on the family projector. So now I take photos.
 				</p>
 
-				{shownImages.map(({ node }) => (
-					<a
-						key={node.name}
-						onClick={() => setActiveImage(node.name)}
-						css={css`
-							cursor: pointer;
-						`}
-					>
-						<figure
+				{shownImages.map(({ node }) =>
+					node?.childImageSharp?.gatsbyImageData ? (
+						<a
+							key={node.name}
+							onClick={() => setActiveImage(node.name)}
 							css={css`
-								margin-bottom: ${Unit.HALF}px;
-
-								@media screen and (max-height: 500px),
-									screen and (max-width: 500px) {
-									margin-bottom: ${Unit.QUART}px;
-								}
+								cursor: pointer;
 							`}
 						>
-							<GatsbyImage
-								image={node.childImageSharp.gatsbyImageData}
-								alt=""
+							<figure
 								css={css`
-									max-width: calc(100vw - ${Unit.FULL}px);
-									max-height: calc(100vh - ${Unit.FULL}px);
+									margin-bottom: ${Unit.HALF}px;
 
 									@media screen and (max-height: 500px),
 										screen and (max-width: 500px) {
-										max-width: calc(100vw - ${Unit.HALF}px);
-										max-height: calc(100vh - ${Unit.HALF}px);
+										margin-bottom: ${Unit.QUART}px;
 									}
 								`}
-								objectFit="contain"
-								objectPosition="left center"
-							/>
-						</figure>
-					</a>
-				))}
+							>
+								<GatsbyImage
+									image={node.childImageSharp.gatsbyImageData}
+									alt=""
+									css={css`
+										max-width: calc(100vw - ${Unit.FULL}px);
+										max-height: calc(100vh - ${Unit.FULL}px);
+
+										@media screen and (max-height: 500px),
+											screen and (max-width: 500px) {
+											max-width: calc(100vw - ${Unit.HALF}px);
+											max-height: calc(100vh - ${Unit.HALF}px);
+										}
+									`}
+									objectFit="contain"
+									objectPosition="left center"
+								/>
+							</figure>
+						</a>
+					) : null,
+				)}
 
 				<div ref={loadRef}>{hasMore && 'Loading...'}</div>
 
-				{openImage && (
+				{openImage?.childImageSharp?.gatsbyImageData ? (
 					<figure
 						css={css`
 							position: fixed;
@@ -158,7 +162,7 @@ const PhotographyPage = () => {
 							objectPosition="center center"
 						/>
 					</figure>
-				)}
+				) : null}
 			</Wysiwyg>
 		</Layout>
 	);

@@ -6,11 +6,11 @@
  */
 /** @jsx jsx */
 import { jsx } from '@emotion/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
 
 import { wyswiyg } from './style';
 
-const Wysiwyg: FunctionComponent<{ component?: string }> = ({
+const Wysiwyg: FunctionComponent<PropsWithChildren<{ component?: string }>> = ({
 	children,
 	component = 'div',
 	...rest

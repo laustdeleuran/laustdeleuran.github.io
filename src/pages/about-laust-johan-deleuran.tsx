@@ -1,15 +1,22 @@
 /** @jsx jsx */
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { useStaticQuery, graphql } from 'gatsby';
+import { css, jsx } from '@emotion/react';
 
 import Wysiwyg from '../components/wysiwyg';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import { jsx, css } from '@emotion/react';
 import { Contact } from '../components/contact';
 
 const AboutPage = () => {
-	const data = useStaticQuery(graphql`
+	const data: {
+		bep: Queries.File;
+		erc: Queries.File;
+		hec: Queries.File;
+		jsc: Queries.File;
+		mni: Queries.File;
+		mts: Queries.File;
+	} = useStaticQuery(graphql`
 		query {
 			bep: file(relativePath: { eq: "content/quotes-bep.jpg" }) {
 				childImageSharp {
@@ -154,11 +161,13 @@ const AboutPage = () => {
 				<ul className="quotes">
 					<li className="vcard">
 						<blockquote>
-							<GatsbyImage
-								image={data.mni.childImageSharp.gatsbyImageData}
-								alt="Photo of Michael Nilsson"
-								className="photo"
-							/>
+							{data.mni?.childImageSharp?.gatsbyImageData ? (
+								<GatsbyImage
+									image={data.mni.childImageSharp.gatsbyImageData}
+									alt="Photo of Michael Nilsson"
+									className="photo"
+								/>
+							) : null}
 							<p>
 								What I truly enjoy about my line of work, is that I once in a
 								while come across people who make me feel I've plenty more to
@@ -177,11 +186,13 @@ const AboutPage = () => {
 					</li>
 					<li className="vcard">
 						<blockquote>
-							<GatsbyImage
-								image={data.erc.childImageSharp.gatsbyImageData}
-								alt="Photo of Emil Rømer Christensen"
-								className="photo"
-							/>
+							{data.erc?.childImageSharp?.gatsbyImageData ? (
+								<GatsbyImage
+									image={data.erc.childImageSharp.gatsbyImageData}
+									alt="Photo of Emil Rømer Christensen"
+									className="photo"
+								/>
+							) : null}
 							<p>
 								Laust is one of the best, if not the best, front-end developers
 								I've ever worked with.{' '}
@@ -199,11 +210,13 @@ const AboutPage = () => {
 					</li>
 					<li className="vcard">
 						<blockquote>
-							<GatsbyImage
-								image={data.hec.childImageSharp.gatsbyImageData}
-								alt="Photo of Harald Eckmüller"
-								className="photo"
-							/>
+							{data.hec?.childImageSharp?.gatsbyImageData ? (
+								<GatsbyImage
+									image={data.hec.childImageSharp.gatsbyImageData}
+									alt="Photo of Harald Eckmüller"
+									className="photo"
+								/>
+							) : null}
 							<p>
 								He has a passion for his craft that is rarely seen in veterans
 								of the industry and spending any amount of time with him will
@@ -223,11 +236,13 @@ const AboutPage = () => {
 					</li>
 					<li className="vcard">
 						<blockquote>
-							<GatsbyImage
-								image={data.jsc.childImageSharp.gatsbyImageData}
-								alt="Photo of Janina Schill"
-								className="photo"
-							/>
+							{data.jsc?.childImageSharp?.gatsbyImageData ? (
+								<GatsbyImage
+									image={data.jsc.childImageSharp.gatsbyImageData}
+									alt="Photo of Janina Schill"
+									className="photo"
+								/>
+							) : null}
 							<p>
 								Laust has been a great mentor, always up for helping anyone in
 								need and sharing his research on new technologies and approaches
@@ -246,11 +261,13 @@ const AboutPage = () => {
 					</li>
 					<li className="vcard">
 						<blockquote>
-							<GatsbyImage
-								image={data.mts.childImageSharp.gatsbyImageData}
-								alt="Photo of Morten Steinbach"
-								className="photo"
-							/>
+							{data.mts?.childImageSharp?.gatsbyImageData ? (
+								<GatsbyImage
+									image={data.mts.childImageSharp.gatsbyImageData}
+									alt="Photo of Morten Steinbach"
+									className="photo"
+								/>
+							) : null}
 							<p>
 								Definitely one of the most dedicated people I have ever worked
 								with.
@@ -268,11 +285,13 @@ const AboutPage = () => {
 					</li>
 					<li className="vcard">
 						<blockquote>
-							<GatsbyImage
-								image={data.bep.childImageSharp.gatsbyImageData}
-								alt="Photo of Bernt Elkjær"
-								className="photo"
-							/>
+							{data.bep?.childImageSharp?.gatsbyImageData ? (
+								<GatsbyImage
+									image={data.bep.childImageSharp.gatsbyImageData}
+									alt="Photo of Bernt Elkjær"
+									className="photo"
+								/>
+							) : null}
 							<p>
 								Laust has the unique combination of technical skills and a
 								business-oriented mindset.

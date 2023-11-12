@@ -34,7 +34,7 @@ export const header = (bgColor: string = Color.WHITE, showNav: boolean) => css`
 	}
 `;
 
-export const headerTitleLink = (hasBgColor) => css`
+export const headerTitleLink = (hasBgColor: boolean) => css`
 	color: ${Color.BLACK};
 	margin-top: ${Typography.LINE_HEIGHT * 1}px;
 	margin-bottom: ${Typography.LINE_HEIGHT * 1}px;
@@ -65,7 +65,7 @@ export const nav = css`
 	display: flex;
 `;
 
-export const navLink = (hasBgColor) => css`
+export const navLink = (hasBgColor: boolean) => css`
 	${headerType};
 	color: ${hasBgColor ? Color.BLACK : Color.GREY_MEDIUM};
 	display: block;

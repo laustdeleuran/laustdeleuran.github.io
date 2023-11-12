@@ -1,24 +1,21 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react';
+import { jsx, css } from '@emotion/react';
 import { Link } from 'gatsby';
-import React from 'react';
 import { Color, heading3, Scale, Typography } from '../../utils/style/style';
+import { Fragment, FunctionComponent } from 'react';
 
-export const mapPostsToList = (edges) =>
+export const mapPostsToList = (edges: Queries.MarkdownRemarkEdge[]) =>
 	edges.map(({ node }) => ({
 		id: node.id,
-		title: node.frontmatter.title,
-		to: node.frontmatter.slug,
+		title: node.frontmatter?.title || 'Unknown title',
+		to: node.frontmatter?.slug || 'Unknown slug',
 	}));
 
-const List = ({
-	items,
-	title,
-}: {
+const List: FunctionComponent<{
 	items: { id: string; to: string; title: string }[];
 	title: string;
-}) => (
-	<>
+}> = ({ items, title }) => (
+	<Fragment>
 		<h1>{title}</h1>
 		<ol>
 			{items.map(({ id, title, to }) => (
@@ -57,7 +54,7 @@ const List = ({
 				</li>
 			))}
 		</ol>
-	</>
+	</Fragment>
 );
 
 export default List;
