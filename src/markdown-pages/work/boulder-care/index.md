@@ -5,7 +5,7 @@ date: 2021-08-15
 link: https://boulder.care/
 slug: /my-work/boulder-care
 tags:
-  - Engineering Manager
+  - Director of Engineering
 title: Boulder Care
 type: work
 ---
