@@ -1,5 +1,11 @@
 /** @jsx jsx */
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
+import {
+	Fragment,
+	FunctionComponent,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { useStaticQuery, graphql } from 'gatsby';
 import { jsx, css } from '@emotion/react';
@@ -10,7 +16,7 @@ import SEO from '../components/seo';
 import { Unit } from '../css/theme.css';
 
 const PhotographyPage: FunctionComponent = () => {
-	const [activeImage, setActiveImage] = useState<string>('');
+	const [activeImage, setActiveImage] = useState<string | null>(null);
 	const data: {
 		allFile: { edges: { node: Queries.File }[] };
 	} = useStaticQuery(graphql`
@@ -78,93 +84,118 @@ const PhotographyPage: FunctionComponent = () => {
 		};
 	}, [loadRef.current]);
 
+	const disableScroll = () =>
+		(document.documentElement.style.overflow = 'hidden');
+	const enableScroll = () => (document.documentElement.style.overflow = '');
+	useEffect(() => {
+		if (activeImage) {
+			disableScroll();
+		} else {
+			enableScroll();
+		}
+		return () => {
+			enableScroll();
+		};
+	}, [activeImage]);
+
 	const openImage = allImages.find(
 		({ node }) => node.name === activeImage,
 	)?.node;
 
 	return (
-		<Layout>
-			<SEO title="Photos" />
-			<Wysiwyg component="article">
-				<h1>What I see</h1>
-				<p>
-					My family takes photos. Some of the best times with my family while
-					growing up was spent drinking tea and watching photos from vacations
-					on the family projector. So now I take photos.
-				</p>
+		<Fragment>
+			<Layout>
+				<SEO title="Photos" />
+				<Wysiwyg component="article">
+					<h1>What I see</h1>
+					<p>
+						My family takes photos. Some of the best times with my family while
+						growing up was spent drinking tea and watching photos from vacations
+						on the family projector. So now I take photos.
+					</p>
 
-				{shownImages.map(({ node }) =>
-					node?.childImageSharp?.gatsbyImageData ? (
-						<a
-							key={node.name}
-							onClick={() => setActiveImage(node.name)}
-							css={css`
-								cursor: pointer;
-							`}
-						>
-							<figure
+					{shownImages.map(({ node }) =>
+						node?.childImageSharp?.gatsbyImageData ? (
+							<a
+								key={node.name}
+								onClick={() => setActiveImage(node.name)}
 								css={css`
-									margin-bottom: ${Unit.HALF}px;
-
-									@media screen and (max-height: 500px),
-										screen and (max-width: 500px) {
-										margin-bottom: ${Unit.QUART}px;
-									}
+									cursor: pointer;
 								`}
 							>
-								<GatsbyImage
-									image={node.childImageSharp.gatsbyImageData}
-									alt=""
+								<figure
 									css={css`
-										max-width: calc(100vw - ${Unit.FULL}px);
-										max-height: calc(100vh - ${Unit.FULL}px);
+										margin-bottom: ${Unit.HALF}px;
 
 										@media screen and (max-height: 500px),
 											screen and (max-width: 500px) {
-											max-width: calc(100vw - ${Unit.HALF}px);
-											max-height: calc(100vh - ${Unit.HALF}px);
+											margin-bottom: ${Unit.QUART}px;
 										}
 									`}
-									objectFit="contain"
-									objectPosition="left center"
-								/>
-							</figure>
-						</a>
-					) : null,
-				)}
+								>
+									<GatsbyImage
+										image={node.childImageSharp.gatsbyImageData}
+										alt=""
+										css={css`
+											max-width: calc(100vw - ${Unit.FULL}px);
+											max-height: calc(100vh - ${Unit.FULL}px);
 
-				<div ref={loadRef}>{hasMore && 'Loading...'}</div>
+											@media screen and (max-height: 500px),
+												screen and (max-width: 500px) {
+												max-width: calc(100vw - ${Unit.HALF}px);
+												max-height: calc(100vh - ${Unit.HALF}px);
+											}
+										`}
+										objectFit="contain"
+										objectPosition="left center"
+									/>
+								</figure>
+							</a>
+						) : null,
+					)}
 
-				{openImage?.childImageSharp?.gatsbyImageData ? (
-					<figure
+					<div ref={loadRef}>{hasMore && 'Loading...'}</div>
+				</Wysiwyg>
+			</Layout>
+
+			{openImage?.childImageSharp?.gatsbyImageData ? (
+				<figure
+					css={css`
+						overflow: hidden;
+
+						position: fixed;
+						top: 0;
+						right: 0;
+						bottom: 0;
+						left: 0;
+						z-index: 2;
+
+						background-color: #000;
+						margin: 0;
+						cursor: pointer;
+
+						overscroll-behavior: none;
+					`}
+					onClick={() => setActiveImage(null)}
+				>
+					<GatsbyImage
+						image={openImage.childImageSharp.gatsbyImageData}
+						alt=""
 						css={css`
-							position: fixed;
-							top: 0;
-							right: 0;
-							bottom: 0;
-							left: 0;
-							z-index: 2;
+							max-width: calc(100vw);
+							max-height: calc(100vh);
 
-							background-color: #000;
-							margin: 0;
-							cursor: pointer;
+							position: relative;
+							top: 50%;
+							left: 50%;
+							transform: translate3d(-50%, -50%, 0);
 						`}
-						onClick={() => setActiveImage('')}
-					>
-						<GatsbyImage
-							image={openImage.childImageSharp.gatsbyImageData}
-							alt=""
-							css={css`
-								max-width: calc(100vw);
-								max-height: calc(100vh);
-							`}
-							objectFit="contain"
-							objectPosition="center center"
-						/>
-					</figure>
-				) : null}
-			</Wysiwyg>
-		</Layout>
+						objectFit="contain"
+						objectPosition="center center"
+					/>
+				</figure>
+			) : null}
+		</Fragment>
 	);
 };
 
