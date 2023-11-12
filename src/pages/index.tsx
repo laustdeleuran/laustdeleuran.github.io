@@ -1,13 +1,14 @@
 /** @jsx jsx */
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { FunctionComponent } from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
 import { jsx } from '@emotion/react';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import * as style from '../utils/style/style';
+import * as style from './index.css';
 
-const WelcomePage = () => {
+const WelcomePage: FunctionComponent = () => {
 	const {
 		portrait,
 		site,

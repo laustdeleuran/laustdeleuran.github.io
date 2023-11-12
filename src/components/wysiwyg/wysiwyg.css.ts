@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Typography, Unit } from '../../utils/style/style';
+import { Typography, Unit } from '../../css/theme.css';
 
 export const wyswiyg = css`
 	p {

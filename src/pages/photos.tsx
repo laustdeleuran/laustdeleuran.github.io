@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { useStaticQuery, graphql } from 'gatsby';
 import { jsx, css } from '@emotion/react';
@@ -6,10 +7,9 @@ import { jsx, css } from '@emotion/react';
 import Wysiwyg from '../components/wysiwyg';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import { Unit } from '../utils/style/style';
-import { useEffect, useRef, useState } from 'react';
+import { Unit } from '../css/theme.css';
 
-const PhotographyPage = () => {
+const PhotographyPage: FunctionComponent = () => {
 	const [activeImage, setActiveImage] = useState<string>('');
 	const data: {
 		allFile: { edges: { node: Queries.File }[] };

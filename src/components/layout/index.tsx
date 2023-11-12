@@ -14,9 +14,9 @@ import {
 import { Global, css, jsx } from '@emotion/react';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 
-import { baseStyles, Color } from '../../utils/style/style';
-import * as style from './style';
-import { resetStyles } from '../../utils/style/reset';
+import { baseStyles, Color } from '../../css/theme.css';
+import * as style from './layout.css';
+import { resetStyles } from '../../css/reset.css';
 
 const Layout: FunctionComponent<
 	PropsWithChildren<{

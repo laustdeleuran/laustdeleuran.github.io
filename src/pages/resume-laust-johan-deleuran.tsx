@@ -1,11 +1,12 @@
 /** @jsx jsx */
+import { FunctionComponent } from 'react';
 import humanizeDuration from 'humanize-duration';
 import { jsx, css } from '@emotion/react';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Wysiwyg from '../components/wysiwyg';
-import { Color, Typography } from '../utils/style/style';
+import { Color, Typography } from '../css/theme.css';
 import { Contact } from '../components/contact';
 
 const jobs = [
@@ -13,7 +14,7 @@ const jobs = [
 		company: 'Boulder Care',
 		desc: "Boulder Care's mission is to improve the lives of people with substance use disorders. I've felt extremely lucky to contribute to that mission alongside a highly motivated and talented team. I lead a team of focused engineers in a creative and highly adaptive environment where we focus on delivering value as quickly and efficiently as we can.",
 		from: '2021-08-01',
-		title: 'Software Engineering Manager',
+		title: 'Director of Engineering',
 	},
 	{
 		company: 'Wisp',
@@ -76,7 +77,7 @@ const jobs = [
 	},
 ];
 
-const ResumePage = () => {
+const ResumePage: FunctionComponent = () => {
 	return (
 		<Layout>
 			<SEO title="Resume" />

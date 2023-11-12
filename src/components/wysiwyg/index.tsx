@@ -8,7 +8,7 @@
 import { jsx } from '@emotion/react';
 import { FunctionComponent, PropsWithChildren } from 'react';
 
-import { wyswiyg } from './style';
+import { wyswiyg } from './wysiwyg.css';
 
 const Wysiwyg: FunctionComponent<PropsWithChildren<{ component?: string }>> = ({
 	children,

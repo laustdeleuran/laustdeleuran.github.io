@@ -8,8 +8,8 @@
 import ReactPlayer from 'react-player';
 import { Fragment, FunctionComponent, PropsWithChildren } from 'react';
 import { css, jsx } from '@emotion/react';
-import { Color, Unit } from '../../utils/style/style';
-import { rgba } from '../../utils/rgba';
+import { Color, Unit } from '../../css/theme.css';
+import { rgba } from '../../css/rgba';
 
 const Video: FunctionComponent<
 	PropsWithChildren<{ component?: string; src: string }>

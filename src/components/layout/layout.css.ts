@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
-import { rgba } from '../../utils/rgba';
-import {
-	Color,
-	Typography,
-	fontLato,
-	Unit,
-	Scale,
-} from '../../utils/style/style';
+import { rgba } from '../../css/rgba';
+import { Color, Typography, fontLato, Unit, Scale } from '../../css/theme.css';
 
 export const header = (bgColor: string = Color.WHITE, showNav: boolean) => css`
 	backdrop-filter: blur(3px);

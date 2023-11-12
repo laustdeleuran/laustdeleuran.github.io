@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/react';
 import { Link } from 'gatsby';
-import { Color, heading3, Scale, Typography } from '../../utils/style/style';
+import { Color, heading3, Scale, Typography } from '../../css/theme.css';
 import { Fragment, FunctionComponent } from 'react';
 
 export const mapPostsToList = (edges: Queries.MarkdownRemarkEdge[]) =>
