@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Color, Scale, Typography, Unit, displayText } from '../css/theme.css';
+import { Color, Scale, Typography, Unit, displayText } from './theme.css';
 
 const HOME_PICTURE_RATIO = 0.8532423208;
 

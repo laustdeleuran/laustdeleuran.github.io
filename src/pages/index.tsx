@@ -6,7 +6,7 @@ import { jsx } from '@emotion/react';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import * as style from './index.css';
+import * as style from '../css/index.css';
 
 const WelcomePage: FunctionComponent = () => {
 	const {
